@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الرصيف | أخبار لحظة بلحظة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f5f0e8;
+      --cream: #ede8dc;
+      --red: #c0392b;
+      --gold: #b8860b;
+      --mid: #6b6560;
+      --line: #d4cfc5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+    }
+
+    /* ───── TOP BAR ───── */
+    .topbar {
+      background: var(--ink);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 6px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.03em;
+    }
+    .topbar .date { opacity: 0.6; }
+    .topbar .ticker {
+      display: flex;
+      gap: 24px;
+      overflow: hidden;
+      font-size: 0.72rem;
+    }
+    .topbar .ticker span {
+      white-space: nowrap;
+      opacity: 0.85;
+      animation: slide 18s linear infinite;
+    }
+    @keyframes slide {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* ───── HEADER ───── */
+    header {
+      border-bottom: 3px double var(--ink);
+      padding: 28px 32px 18px;
+      text-align: center;
+      background: var(--paper);
+      position: relative;
+    }
+    .logo-eyebrow {
+      font-family: 'Amiri', serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--mid);
+      margin-bottom: 6px;
+    }
+    .logo {
+      font-family: 'Amiri', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ink);
+      position: relative;
+      display: inline-block;
+    }
+    .logo::before, .logo::after {
+      content: '◆';
+      font-size: 1rem;
+      color: var(--red);
+      vertical-align: middle;
+      margin: 0 12px;
+    }
+    .logo-sub {
+      font-size: 0.75rem;
+      color: var(--mid);
+      margin-top: 6px;
+      letter-spacing: 0.15em;
+    }
+
+    /* ───── NAV ───── */
+    nav {
+      background: var(--ink);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      overflow-x: auto;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 11px 22px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+    nav a:first-child { border-left: none; }
+    nav a:hover, nav a.active { background: var(--red); color: #fff; }
+
+    /* ───── BREAKING ───── */
+    .breaking {
+      background: var(--red);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 8px 32px;
+      gap: 16px;
+      font-size: 0.82rem;
+      overflow: hidden;
+    }
+    .breaking-label {
+      background: #fff;
+      color: var(--red);
+      font-weight: 900;
+      padding: 2px 10px;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+    .breaking-text {
+      white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ───── LAYOUT ───── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    main { padding: 32px 24px; max-width: 1200px; margin: 0 auto; }
+
+    /* ───── HERO GRID ───── */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 0;
+      border: 1px solid var(--line);
+      margin-bottom: 40px;
+      background: #fff;
+    }
+
+    .hero-main {
+      border-left: 1px solid var(--line);
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-main img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.4s;
+    }
+    .hero-main:hover img { filter: grayscale(0%); }
+    .hero-main .content { padding: 24px; }
+    .hero-main .category {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .hero-main h2 {
+      font-family: 'Amiri', serif;
+      font-size: 1.9rem;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .hero-main p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+    }
+    .side-card {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      flex: 1;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .side-card:last-child { border-bottom: none; }
+    .side-card:hover { background: var(--cream); }
+    .side-card .category {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .side-card h3 {
+      font-family: 'Amiri', serif;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .side-card .meta {
+      font-size: 0.7rem;
+      color: var(--mid);
+    }
+
+    /* ───── SECTION TITLE ───── */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .section-title h2 {
+      font-family: 'Amiri', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+    .section-title .dot {
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ───── CARDS GRID ───── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.3s;
+    }
+    .card:hover img { filter: grayscale(0); }
+    .card-body { padding: 16px; }
+    .card-body .category {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .card-body h3 {
+      font-family: 'Amiri', serif;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--mid);
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    /* ───── LIST SECTION ───── */
+    .list-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .news-list .list-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .news-list .list-item:hover { background: var(--cream); }
+    .news-list .list-item img {
+      width: 100px;
+      height: 72px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .list-item-text .category {
+      font-size: 0.63rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.07em;
+    }
+    .list-item-text h4 {
+      font-family: 'Amiri', serif;
+      font-size: 1rem;
+      line-height: 1.45;
+      margin: 4px 0;
+    }
+    .list-item-text .meta { font-size: 0.68rem; color: var(--mid); }
+
+    /* ───── SIDEBAR ───── */
+    .sidebar-box {
+      background: var(--ink);
+      color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .sidebar-box h3 {
+      font-family: 'Amiri', serif;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .trend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .trend-item:last-child { border-bottom: none; }
+    .trend-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 28px;
+    }
+    .trend-item p { font-size: 0.82rem; line-height: 1.5; opacity: 0.9; }
+
+    /* ───── WEATHER ───── */
+    .weather-box {
+      background: linear-gradient(135deg, #1a3a5c, #2563a8);
+      color: #fff;
+      padding: 20px;
+      border-radius: 2px;
+    }
+    .weather-box h3 {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+    .weather-main {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .weather-icon { font-size: 2.5rem; }
+    .weather-temp { font-size: 2.8rem; font-weight: 700; }
+    .weather-city { font-size: 0.85rem; opacity: 0.8; }
+    .weather-desc { font-size: 0.8rem; opacity: 0.65; }
+
+    /* ───── FOOTER ───── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.6);
+      padding: 40px 32px 20px;
+      margin-top: 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto 30px;
+    }
+    .footer-logo {
+      font-family: 'Amiri', serif;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .footer-about { font-size: 0.82rem; line-height: 1.7; }
+    .footer-links h4 {
+      color: #fff;
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+    .footer-links ul { list-style: none; }
+    .footer-links li { padding: 5px 0; font-size: 0.78rem; }
+    .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.73rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .list-section { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+      nav a { padding: 10px 14px; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <span class="date">الإثنين، 26 مايو 2026</span>
+    <div class="ticker">
+      <span>🌡️ الرياض 38° &nbsp;|&nbsp; 💰 الذهب 3,250$ &nbsp;|&nbsp; 🛢️ النفط 82$ &nbsp;|&nbsp; 💱 الدولار 3.75 ريال</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-eyebrow">صحيفة إلكترونية مستقلة</div>
+    <div class="logo">الرصيف</div>
+    <div class="logo-sub">الخبر الحقيقي · في الوقت الحقيقي</div>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="active">الرئيسية</a>
+    <a href="#">عاجل</a>
+    <a href="#">محلي</a>
+    <a href="#">دولي</a>
+    <a href="#">اقتصاد</a>
+    <a href="#">رياضة</a>
+    <a href="#">تقنية</a>
+    <a href="#">ثقافة</a>
+    <a href="#">رأي</a>
+  </nav>
+
+  <!-- BREAKING -->
+  <div class="breaking">
+    <span class="breaking-label">عاجل</span>
+    <span class="breaking-text">
+      ◆ مجلس الأمن يعقد جلسة طارئة لمناقشة الأوضاع الإقليمية &nbsp;&nbsp;
+      ◆ البنك المركزي يُبقي أسعار الفائدة دون تغيير &nbsp;&nbsp;
+      ◆ اكتشاف علمي جديد في مجال الطاقة الشمسية بمنطقة الخليج &nbsp;&nbsp;
+      ◆ مجلس الأمن يعقد جلسة طارئة لمناقشة الأوضاع الإقليمية &nbsp;&nbsp;
+      ◆ البنك المركزي يُبقي أسعار الفائدة دون تغيير &nbsp;&nbsp;
+    </span>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- HERO -->
+    <div class="hero-grid">
+      <div class="hero-main">
+        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80" alt="خبر رئيسي" />
+        <div class="content">
+          <span class="category">دولي</span>
+          <h2>قمة دولية تُعقد في جنيف لبحث ملفات الأمن والاستقرار الإقليمي وتداعياتها على المنطقة</h2>
+          <p>اجتمع قادة ودبلوماسيون من أكثر من أربعين دولة في جنيف لمناقشة آليات تعزيز الأمن الإقليمي ووضع أُطر تعاون مشتركة في مواجهة التحديات الراهنة.</p>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="side-card">
+          <span class="category">اقتصاد</span>
+          <h3>أسواق الخليج تُغلق على ارتفاع ملحوظ وسط توقعات إيجابية</h3>
+          <div class="meta">منذ ساعتين · فريق التحرير</div>
+        </div>
+        <div class="side-card">
+          <span class="category">تقنية</span>
+          <h3>شركات الذكاء الاصطناعي تتسابق نحو نماذج جديدة تُحدث ثورة في القطاع</h3>
+          <div class="meta">منذ 3 ساعات · مراسل التقنية</div>
+        </div>
+        <div class="side-card">
+          <span class="category">رياضة</span>
+          <h3>المنتخب الوطني يُجري مرانه الأخير قبيل المباراة الحاسمة</h3>
+          <div class="meta">منذ 4 ساعات · قسم الرياضة</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LATEST NEWS -->
+    <div class="section-title">
+      <div class="dot"></div>
+      <h2>أحدث الأخبار</h2>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&q=80" alt="" />
+        <div class="card-body">
+          <span class="category">◆ اقتصاد</span>
+          <h3>مشاريع استثمارية ضخمة تُطلق في منطقة نيوم ضمن رؤية 2030</h3>
+          <div class="card-meta"><span>منذ ساعة</span><span>محلي</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=600&q=80" alt="" />
+        <div class="card-body">
+          <span class="category">◆ بيئة</span>
+          <h3>تقرير أممي يُحذر من ارتفاع منسوب البحار بوتيرة غير مسبوقة</h3>
+          <div class="card-meta"><span>منذ 3 ساعات</span><span>دولي</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=80" alt="" />
+        <div class="card-body">
+          <span class="category">◆ رياضة</span>
+          <h3>نجم كرة القدم يُعلن رسمياً انتقاله إلى نادٍ خليجي في صفقة تاريخية</h3>
+          <div class="card-meta"><span>منذ 5 ساعات</span><span>رياضة</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIST + SIDEBAR -->
+    <div class="list-section">
+      <div>
+        <div class="section-title">
+          <div class="dot"></div>
+          <h2>تقارير وتحليلات</h2>
+        </div>
+        <div class="news-list">
+          <div class="list-item">
+            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=300&q=80" alt="" />
+            <div class="list-item-text">
+              <div class="category">تقنية</div>
+              <h4>كيف يُعيد الذكاء الاصطناعي تشكيل سوق العمل في المنطقة العربية؟</h4>
+              <div class="meta">بقلم: د. سلمى الرشيد · 26 مايو 2026</div>
+            </div>
+          </div>
+          <div class="list-item">
+            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&q=80" alt="" />
+            <div class="list-item-text">
+              <div class="category">اقتصاد</div>
+              <h4>توقعات النمو الاقتصادي الخليجي تتجاوز 4% رغم تقلبات الأسواق</h4>
+              <div class="meta">بقلم: أحمد المنصور · 25 مايو 2026</div>
+            </div>
+          </div>
+          <div class="list-item">
+            <img src="https://images.unsplash.com/photo-1488229297570-58520851e868?w=300&q=80" alt="" />
+            <div class="list-item-text">
+              <div class="category">علوم</div>
+              <h4>علماء عرب يُشاركون في مشروع فضائي دولي لاستكشاف المريخ</h4>
+              <div class="meta">بقلم: نورة الحربي · 24 مايو 2026</div>
+            </div>
+          </div>
+          <div class="list-item">
+            <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=300&q=80" alt="" />
+            <div class="list-item-text">
+              <div class="category">ثقافة</div>
+              <h4>مهرجان أدبي عربي يجمع أبرز الأقلام في الرياض الشهر القادم</h4>
+              <div class="meta">بقلم: ليلى بن عمر · 23 مايو 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <!-- TRENDING -->
+        <div class="sidebar-box">
+          <h3>🔥 الأكثر قراءة</h3>
+          <div class="trend-item">
+            <div class="trend-num">01</div>
+            <p>أسعار النفط تقفز 3% بعد قرارات أوبك+ المفاجئة</p>
+          </div>
+          <div class="trend-item">
+            <div class="trend-num">02</div>
+            <p>الاتحاد الأوروبي يُقر حزمة دعم اقتصادي جديدة</p>
+          </div>
+          <div class="trend-item">
+            <div class="trend-num">03</div>
+            <p>اكتشاف رواسب معدنية ضخمة في منطقة عربية</p>
+          </div>
+          <div class="trend-item">
+            <div class="trend-num">04</div>
+            <p>تحولات جذرية في منظومة التعليم الرقمي العربي</p>
+          </div>
+          <div class="trend-item">
+            <div class="trend-num">05</div>
+            <p>انطلاق موسم صيفي استثنائي في المدن السياحية</p>
+          </div>
+        </div>
+
+        <!-- WEATHER -->
+        <div class="weather-box">
+          <h3>◈ حالة الطقس — الرياض</h3>
+          <div class="weather-main">
+            <div class="weather-icon">☀️</div>
+            <div>
+              <div class="weather-temp">38°</div>
+              <div class="weather-city">مشمس جزئياً</div>
+            </div>
+          </div>
+          <div class="weather-desc">رطوبة 22% · رياح 15 كم/س · غداً 36°</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">الرصيف</div>
+        <p class="footer-about">صحيفة إلكترونية مستقلة تسعى إلى تقديم الخبر الموثوق والتحليل الرصين. نؤمن بحرية الصحافة ومسؤوليتها تجاه القارئ.</p>
+      </div>
+      <div class="footer-links">
+        <h4>أقسام الموقع</h4>
+        <ul>
+          <li><a href="#">محلي</a></li>
+          <li><a href="#">دولي</a></li>
+          <li><a href="#">اقتصاد</a></li>
+          <li><a href="#">رياضة</a></li>
+          <li><a href="#">تقنية</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>عن الرصيف</h4>
+        <ul>
+          <li><a href="#">من نحن</a></li>
+          <li><a href="#">تواصل معنا</a></li>
+          <li><a href="#">سياسة الخصوصية</a></li>
+          <li><a href="#">الإعلان معنا</a></li>
+          <li><a href="#">خريطة الموقع</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      جميع الحقوق محفوظة © 2026 · صحيفة الرصيف الإلكترونية
+    </div>
+  </footer>
+
+</body>
+</html>
