@@ -6,275 +6,293 @@
   <title>الرصيف | أخبار العالم</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --ink: #0d0d0d; --paper: #f5f0e8; --cream: #ede8dc;
-      --red: #c0392b; --gold: #b8860b; --mid: #6b6560; --line: #d4cfc5;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { background:var(--paper); color:var(--ink); font-family:'Cairo',sans-serif; direction:rtl; }
+    :root { --ink:#0d0d0d; --paper:#f5f0e8; --cream:#ede8dc; --red:#c0392b; --gold:#b8860b; --mid:#6b6560; --line:#d4cfc5; }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--paper);color:var(--ink);font-family:'Cairo',sans-serif;direction:rtl;}
 
-    .topbar { background:var(--ink); color:#fff; font-size:0.75rem; padding:6px 24px; display:flex; justify-content:space-between; align-items:center; }
-    .ticker-wrap { overflow:hidden; flex:1; margin:0 20px; }
-    .ticker { display:inline-flex; gap:40px; animation:ticker 35s linear infinite; white-space:nowrap; }
-    .ticker span { opacity:0.85; }
-    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .topbar{background:var(--ink);color:#fff;font-size:0.75rem;padding:6px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+    .ticker-wrap{overflow:hidden;flex:1;}
+    .ticker{display:inline-flex;gap:40px;animation:ticker 35s linear infinite;white-space:nowrap;}
+    .ticker span{opacity:0.85;font-size:0.72rem;}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-    header { border-bottom:3px double var(--ink); padding:20px 24px 14px; text-align:center; }
-    .logo { font-family:'Amiri',serif; font-size:clamp(2.5rem,7vw,5rem); font-weight:700; line-height:1; }
-    .logo::before,.logo::after { content:'◆'; font-size:1rem; color:var(--red); margin:0 10px; vertical-align:middle; }
-    .logo-sub { font-size:0.72rem; color:var(--mid); margin-top:4px; letter-spacing:0.15em; }
+    header{border-bottom:3px double var(--ink);padding:18px 20px 12px;text-align:center;background:var(--paper);}
+    .logo{font-family:'Amiri',serif;font-size:clamp(2.5rem,7vw,5rem);font-weight:700;line-height:1;}
+    .logo::before,.logo::after{content:'◆';font-size:1rem;color:var(--red);margin:0 10px;vertical-align:middle;}
+    .logo-sub{font-size:0.7rem;color:var(--mid);margin-top:4px;letter-spacing:0.12em;}
 
-    nav { background:var(--ink); display:flex; justify-content:center; overflow-x:auto; }
-    nav button { color:#fff; background:none; border:none; padding:10px 16px; font-size:0.78rem; font-weight:600; font-family:'Cairo',sans-serif; cursor:pointer; white-space:nowrap; border-left:1px solid rgba(255,255,255,0.1); transition:background 0.2s; }
-    nav button:first-child { border-left:none; }
-    nav button:hover, nav button.active { background:var(--red); }
+    nav{background:var(--ink);display:flex;overflow-x:auto;}
+    nav button{color:#fff;background:none;border:none;padding:10px 14px;font-size:0.77rem;font-weight:600;font-family:'Cairo',sans-serif;cursor:pointer;white-space:nowrap;border-left:1px solid rgba(255,255,255,0.1);transition:background 0.2s;}
+    nav button:first-child{border-left:none;}
+    nav button:hover,nav button.active{background:var(--red);}
 
-    .breaking { background:var(--red); color:#fff; display:flex; align-items:center; padding:7px 24px; gap:14px; overflow:hidden; }
-    .breaking-label { background:#fff; color:var(--red); font-weight:900; padding:2px 8px; font-size:0.68rem; flex-shrink:0; border-radius:2px; }
-    .breaking-text { white-space:nowrap; font-size:0.8rem; animation:marquee 30s linear infinite; }
-    @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .breaking{background:var(--red);color:#fff;display:flex;align-items:center;padding:7px 20px;gap:12px;overflow:hidden;}
+    .blabel{background:#fff;color:var(--red);font-weight:900;padding:2px 8px;font-size:0.65rem;flex-shrink:0;border-radius:2px;}
+    .btext{white-space:nowrap;font-size:0.78rem;animation:marquee 28s linear infinite;}
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-    main { max-width:1200px; margin:0 auto; padding:24px 16px; }
+    main{max-width:1180px;margin:0 auto;padding:20px 14px;}
+    .loading{text-align:center;padding:60px 20px;color:var(--mid);}
+    .spinner{width:38px;height:38px;border:3px solid var(--line);border-top-color:var(--red);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 14px;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .err{background:#fff3f3;border:1px solid #fcc;padding:20px;text-align:center;color:var(--red);margin:20px 0;border-radius:4px;}
+    .err button{margin-top:10px;padding:8px 18px;background:var(--red);color:#fff;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
 
-    .loading { text-align:center; padding:60px 20px; color:var(--mid); }
-    .spinner { width:40px; height:40px; border:3px solid var(--line); border-top-color:var(--red); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 16px; }
-    @keyframes spin { to{transform:rotate(360deg)} }
+    .stitle{display:flex;align-items:center;gap:10px;margin:28px 0 16px;}
+    .stitle h2{font-family:'Amiri',serif;font-size:1.35rem;font-weight:700;}
+    .stitle::after{content:'';flex:1;height:1px;background:var(--line);}
+    .dot{width:8px;height:8px;background:var(--red);border-radius:50%;flex-shrink:0;}
 
-    .error-box { background:#fff3f3; border:1px solid #ffcccc; padding:20px; text-align:center; color:var(--red); margin:20px 0; border-radius:4px; }
-    .error-box button { margin-top:12px; padding:8px 20px; background:var(--red); color:#fff; border:none; cursor:pointer; font-family:'Cairo',sans-serif; font-size:0.85rem; }
+    .hero{display:grid;grid-template-columns:2fr 1fr;border:1px solid var(--line);background:#fff;margin-bottom:28px;}
+    .hmain{border-left:1px solid var(--line);cursor:pointer;}
+    .hmain img{width:100%;height:260px;object-fit:cover;display:block;transition:opacity 0.3s;}
+    .hmain:hover img{opacity:0.88;}
+    .hmain .hc{padding:18px;}
+    .badge{display:inline-block;background:var(--red);color:#fff;font-size:0.62rem;font-weight:700;padding:2px 8px;margin-bottom:7px;}
+    .hmain h2{font-family:'Amiri',serif;font-size:1.5rem;line-height:1.45;margin-bottom:7px;}
+    .hmain p{font-size:0.83rem;color:var(--mid);line-height:1.7;}
+    .hside{display:flex;flex-direction:column;}
+    .scard{padding:14px;border-bottom:1px solid var(--line);flex:1;cursor:pointer;transition:background 0.2s;}
+    .scard:last-child{border-bottom:none;}
+    .scard:hover{background:var(--cream);}
+    .scat{font-size:0.6rem;font-weight:700;color:var(--gold);letter-spacing:0.07em;margin-bottom:4px;display:block;}
+    .scard h3{font-family:'Amiri',serif;font-size:0.97rem;line-height:1.5;}
 
-    .section-title { display:flex; align-items:center; gap:12px; margin-bottom:20px; margin-top:32px; }
-    .section-title h2 { font-family:'Amiri',serif; font-size:1.4rem; font-weight:700; }
-    .section-title::after { content:''; flex:1; height:1px; background:var(--line); }
-    .dot { width:8px; height:8px; background:var(--red); border-radius:50%; flex-shrink:0; }
+    .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px;}
+    .card{background:#fff;border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;}
+    .card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,0.08);}
+    .card img{width:100%;height:155px;object-fit:cover;display:block;}
+    .cbody{padding:13px;}
+    .ccat{font-size:0.6rem;font-weight:700;color:var(--red);letter-spacing:0.06em;margin-bottom:5px;display:block;}
+    .cbody h3{font-family:'Amiri',serif;font-size:0.97rem;line-height:1.5;}
+    .csrc{font-size:0.65rem;color:var(--mid);margin-top:7px;padding-top:7px;border-top:1px solid var(--line);}
 
-    .hero-grid { display:grid; grid-template-columns:2fr 1fr; border:1px solid var(--line); background:#fff; margin-bottom:32px; }
-    .hero-main { border-left:1px solid var(--line); cursor:pointer; }
-    .hero-main img { width:100%; height:280px; object-fit:cover; display:block; transition:opacity 0.3s; }
-    .hero-main:hover img { opacity:0.9; }
-    .hero-main .content { padding:20px; }
-    .cat-badge { display:inline-block; background:var(--red); color:#fff; font-size:0.65rem; font-weight:700; padding:2px 8px; margin-bottom:8px; }
-    .hero-main h2 { font-family:'Amiri',serif; font-size:1.6rem; line-height:1.45; margin-bottom:8px; }
-    .hero-main p { font-size:0.85rem; color:var(--mid); line-height:1.7; }
-    .hero-side { display:flex; flex-direction:column; }
-    .side-card { padding:16px; border-bottom:1px solid var(--line); flex:1; cursor:pointer; transition:background 0.2s; }
-    .side-card:last-child { border-bottom:none; }
-    .side-card:hover { background:var(--cream); }
-    .side-cat { font-size:0.62rem; font-weight:700; color:var(--gold); letter-spacing:0.07em; margin-bottom:5px; display:block; }
-    .side-card h3 { font-family:'Amiri',serif; font-size:1rem; line-height:1.5; }
+    .twocol{display:grid;grid-template-columns:2fr 1fr;gap:28px;}
+    .litem{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:background 0.15s;}
+    .litem:hover{background:var(--cream);}
+    .litem img{width:88px;height:62px;object-fit:cover;flex-shrink:0;}
+    .lcat{font-size:0.58rem;font-weight:700;color:var(--gold);}
+    .litem h4{font-family:'Amiri',serif;font-size:0.92rem;line-height:1.45;margin:3px 0;}
+    .lsrc{font-size:0.62rem;color:var(--mid);}
 
-    .cards-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:32px; }
-    .card { background:#fff; border:1px solid var(--line); overflow:hidden; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; }
-    .card:hover { transform:translateY(-3px); box-shadow:0 10px 24px rgba(0,0,0,0.08); }
-    .card img { width:100%; height:160px; object-fit:cover; display:block; }
-    .card-body { padding:14px; }
-    .card-cat { font-size:0.62rem; font-weight:700; color:var(--red); letter-spacing:0.06em; margin-bottom:6px; display:block; }
-    .card-body h3 { font-family:'Amiri',serif; font-size:1rem; line-height:1.5; }
-    .card-src { font-size:0.68rem; color:var(--mid); margin-top:8px; padding-top:8px; border-top:1px solid var(--line); }
+    .sidebar{background:var(--ink);color:#fff;padding:16px;margin-bottom:18px;}
+    .sidebar h3{font-family:'Amiri',serif;font-size:1rem;margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid rgba(255,255,255,0.15);}
+    .titem{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.08);cursor:pointer;}
+    .titem:last-child{border-bottom:none;}
+    .tnum{font-size:1.2rem;font-weight:900;color:var(--red);min-width:24px;line-height:1;}
+    .titem p{font-size:0.78rem;line-height:1.5;opacity:0.88;}
 
-    .two-col { display:grid; grid-template-columns:2fr 1fr; gap:32px; }
-    .list-item { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); cursor:pointer; transition:background 0.15s; }
-    .list-item:hover { background:var(--cream); }
-    .list-item img { width:90px; height:65px; object-fit:cover; flex-shrink:0; }
-    .list-cat { font-size:0.6rem; font-weight:700; color:var(--gold); }
-    .list-item h4 { font-family:'Amiri',serif; font-size:0.95rem; line-height:1.45; margin:3px 0; }
-    .list-src { font-size:0.65rem; color:var(--mid); }
+    .sources{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+    .src-btn{background:#fff;border:1px solid var(--line);padding:5px 12px;font-family:'Cairo',sans-serif;font-size:0.72rem;cursor:pointer;transition:all 0.2s;}
+    .src-btn:hover,.src-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
 
-    .sidebar-box { background:var(--ink); color:#fff; padding:18px; margin-bottom:20px; }
-    .sidebar-box h3 { font-family:'Amiri',serif; font-size:1.05rem; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.15); }
-    .trend-item { display:flex; gap:10px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.08); cursor:pointer; }
-    .trend-item:last-child { border-bottom:none; }
-    .trend-num { font-size:1.3rem; font-weight:900; color:var(--red); min-width:26px; line-height:1; }
-    .trend-item p { font-size:0.8rem; line-height:1.5; opacity:0.88; }
+    .modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:1000;overflow-y:auto;padding:16px;}
+    .modal-ov.open{display:flex;align-items:flex-start;justify-content:center;}
+    .mwrap{position:relative;max-width:700px;width:100%;margin:auto;}
+    .modal{background:#fff;overflow:hidden;animation:mIn 0.3s ease;}
+    @keyframes mIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .mimg{width:100%;height:260px;object-fit:cover;display:block;}
+    .mbody{padding:24px;}
+    .mtitle{font-family:'Amiri',serif;font-size:1.7rem;line-height:1.4;margin:8px 0 12px;}
+    .mdesc{font-size:0.92rem;line-height:1.85;color:#333;}
+    .msrc{margin-top:18px;padding-top:12px;border-top:1px solid var(--line);font-size:0.75rem;color:var(--mid);}
+    .msrc a{color:var(--red);text-decoration:none;}
+    .mclose{position:absolute;top:10px;left:10px;background:var(--ink);color:#fff;border:none;padding:7px 14px;font-family:'Cairo',sans-serif;font-size:0.78rem;cursor:pointer;z-index:10;}
 
-    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:1000; overflow-y:auto; padding:20px; }
-    .modal-overlay.open { display:flex; align-items:flex-start; justify-content:center; }
-    .modal-wrap { position:relative; max-width:720px; width:100%; margin:auto; }
-    .modal { background:#fff; overflow:hidden; animation:modalIn 0.3s ease; }
-    @keyframes modalIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    .modal-img { width:100%; height:280px; object-fit:cover; display:block; }
-    .modal-body { padding:28px; }
-    .modal-title { font-family:'Amiri',serif; font-size:1.8rem; line-height:1.4; margin:10px 0 14px; }
-    .modal-desc { font-size:0.95rem; line-height:1.85; color:#333; }
-    .modal-src { margin-top:20px; padding-top:14px; border-top:1px solid var(--line); font-size:0.78rem; color:var(--mid); }
-    .modal-src a { color:var(--red); text-decoration:none; }
-    .modal-close { position:absolute; top:12px; left:12px; background:var(--ink); color:#fff; border:none; padding:8px 16px; font-family:'Cairo',sans-serif; font-size:0.8rem; cursor:pointer; z-index:10; }
+    footer{background:var(--ink);color:rgba(255,255,255,0.5);padding:28px 20px 14px;margin-top:36px;}
+    .finner{max-width:1180px;margin:0 auto;}
+    .flogo{font-family:'Amiri',serif;font-size:1.7rem;color:#fff;margin-bottom:6px;}
+    .fbot{text-align:center;font-size:0.68rem;border-top:1px solid rgba(255,255,255,0.1);padding-top:14px;margin-top:20px;}
 
-    footer { background:var(--ink); color:rgba(255,255,255,0.55); padding:32px 24px 16px; margin-top:40px; }
-    .footer-inner { max-width:1200px; margin:0 auto; }
-    .footer-logo { font-family:'Amiri',serif; font-size:1.8rem; color:#fff; margin-bottom:8px; }
-    .footer-bottom { text-align:center; font-size:0.7rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px; margin-top:24px; }
-
-    @media(max-width:768px) {
-      .hero-grid,.two-col { grid-template-columns:1fr; }
-      .cards-grid { grid-template-columns:1fr 1fr; }
-    }
-    @media(max-width:480px) {
-      .cards-grid { grid-template-columns:1fr; }
-    }
+    @media(max-width:768px){.hero,.twocol{grid-template-columns:1fr;}.cgrid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.cgrid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
 
 <div class="topbar">
-  <span id="currentDate"></span>
-  <div class="ticker-wrap"><div class="ticker" id="ticker"><span>⏳ جاري تحميل الأخبار...</span><span>⏳ جاري تحميل الأخبار...</span></div></div>
+  <span id="cdate" style="white-space:nowrap;font-size:0.7rem;"></span>
+  <div class="ticker-wrap"><div class="ticker" id="ticker"><span>⏳ جاري تحميل...</span><span>⏳ جاري تحميل...</span></div></div>
 </div>
 
 <header>
-  <div style="font-family:'Amiri',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--mid);margin-bottom:4px;">صحيفة إلكترونية مستقلة</div>
+  <div style="font-family:'Amiri',serif;font-size:0.72rem;letter-spacing:0.15em;color:var(--mid);margin-bottom:3px;">صحيفة إلكترونية مستقلة</div>
   <div class="logo">الرصيف</div>
   <div class="logo-sub">أخبار العالم · لحظة بلحظة</div>
 </header>
 
-<nav>
-  <button class="active" onclick="load('breaking','عاجل',this)">عاجل</button>
-  <button onclick="load('world','العالم',this)">العالم</button>
-  <button onclick="load('nation','محلي',this)">محلي</button>
-  <button onclick="load('politics','سياسة',this)">سياسة</button>
-  <button onclick="load('business','اقتصاد',this)">اقتصاد</button>
-  <button onclick="load('technology','تقنية',this)">تقنية</button>
-  <button onclick="load('sports','رياضة',this)">رياضة</button>
-  <button onclick="load('science','علوم',this)">علوم</button>
-  <button onclick="load('health','صحة',this)">صحة</button>
-  <button onclick="load('entertainment','ترفيه',this)">ترفيه</button>
+<nav id="nav">
+  <button class="active" onclick="loadFeed('aljazeera',this)">الجزيرة</button>
+  <button onclick="loadFeed('bbc',this)">BBC عربي</button>
+  <button onclick="loadFeed('alarabiya',this)">العربية</button>
+  <button onclick="loadFeed('rt',this)">RT عربي</button>
+  <button onclick="loadFeed('skynews',this)">سكاي نيوز</button>
+  <button onclick="loadFeed('france24',this)">فرانس 24</button>
+  <button onclick="loadFeed('dw',this)">DW عربية</button>
 </nav>
 
 <div class="breaking">
-  <span class="breaking-label">عاجل</span>
-  <span class="breaking-text" id="breakingText">◆ جاري تحميل الأخبار... ◆ جاري تحميل الأخبار...</span>
+  <span class="blabel">عاجل</span>
+  <span class="btext" id="btext">◆ جاري تحميل الأخبار العاجلة... ◆ جاري تحميل الأخبار العاجلة...</span>
 </div>
 
 <main id="main">
-  <div class="loading"><div class="spinner"></div>جاري جلب أحدث أخبار العالم...</div>
+  <div class="loading"><div class="spinner"></div>جاري جلب أحدث الأخبار...</div>
 </main>
 
-<div class="modal-overlay" id="overlay" onclick="closeOverlay(event)">
-  <div class="modal-wrap">
-    <button class="modal-close" onclick="closeModal()">✕ إغلاق</button>
-    <div class="modal" id="modalBox"></div>
+<div class="modal-ov" id="ov" onclick="closeOv(event)">
+  <div class="mwrap">
+    <button class="mclose" onclick="closeModal()">✕ إغلاق</button>
+    <div class="modal" id="mbox"></div>
   </div>
 </div>
 
 <footer>
-  <div class="footer-inner">
-    <div class="footer-logo">◆ الرصيف</div>
-    <p style="font-size:0.8rem;line-height:1.7;">صحيفة إلكترونية مستقلة تجمع أخبار العالم من مئات المصادر وتقدمها للقارئ العربي.</p>
-    <div class="footer-bottom">جميع الحقوق محفوظة © 2026 · صحيفة الرصيف · مدعوم بـ GNews API</div>
+  <div class="finner">
+    <div class="flogo">◆ الرصيف</div>
+    <p style="font-size:0.78rem;line-height:1.7;">صحيفة إلكترونية مستقلة تجمع أخبار العالم من أبرز المصادر العربية والعالمية.</p>
+    <div class="fbot">جميع الحقوق محفوظة © 2026 · صحيفة الرصيف الإلكترونية</div>
   </div>
 </footer>
 
 <script>
-const GKEY = '56522629fdfed04b487f43b7f692bb78';
-let articles = [];
-let curCat = 'breaking';
-
 // Date
 const D=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 const M=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-const n=new Date();
-document.getElementById('currentDate').textContent=`${D[n.getDay()]}، ${n.getDate()} ${M[n.getMonth()]} ${n.getFullYear()}`;
+const nd=new Date();
+document.getElementById('cdate').textContent=`${D[nd.getDay()]}، ${nd.getDate()} ${M[nd.getMonth()]} ${nd.getFullYear()}`;
 
-function ph(w,h){return `https://placehold.co/${w}x${h}/111/fff?text=%D8%A7%D9%84%D8%B1%D8%B5%D9%8A%D9%81`;}
-function img(u){return u||ph(600,400);}
+const FEEDS = {
+  aljazeera: { name:'الجزيرة', url:'https://www.aljazeera.net/xml/rss/all.xml' },
+  bbc:       { name:'BBC عربي', url:'https://feeds.bbci.co.uk/arabic/rss.xml' },
+  alarabiya: { name:'العربية', url:'https://www.alarabiya.net/feed' },
+  rt:        { name:'RT عربي', url:'https://arabic.rt.com/rss/' },
+  skynews:   { name:'سكاي نيوز عربية', url:'https://www.skynewsarabia.com/rss.xml' },
+  france24:  { name:'فرانس 24', url:'https://www.france24.com/ar/rss' },
+  dw:        { name:'DW عربية', url:'https://rss.dw.com/rdf/rss-ar-all' },
+};
 
-async function fetchGNews(topic){
-  const url=`https://gnews.io/api/v4/top-headlines?topic=${topic}&lang=ar&country=any&max=20&apikey=${GKEY}`;
-  const r=await fetch(url);
-  if(!r.ok) throw new Error(`خطأ ${r.status}`);
-  const d=await r.json();
-  if(!d.articles) throw new Error('لا توجد أخبار');
-  return d.articles.filter(a=>a.title&&a.url);
+const PROXY = 'https://api.allorigins.win/get?url=';
+let arts = [];
+let curName = 'الجزيرة';
+
+function ph(t){ return `https://placehold.co/600x400/111/fff?text=${encodeURIComponent(t||'الرصيف')}`; }
+function gi(el){ 
+  // Try to get image from enclosure, media, or content
+  const enc = el.querySelector('enclosure');
+  if(enc && enc.getAttribute('url')) return enc.getAttribute('url');
+  const media = el.querySelector('thumbnail,image,[url]');
+  if(media) return media.getAttribute('url')||media.textContent;
+  // Try og:image from content
+  const content = el.querySelector('encoded')?.textContent||'';
+  const m = content.match(/src=["'](https?:\/\/[^"']+\.(jpg|jpeg|png|webp))/i);
+  if(m) return m[1];
+  return null;
 }
 
-async function load(topic, label, btn){
-  curCat=topic;
+async function loadFeed(id, btn){
+  curName = FEEDS[id]?.name || id;
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  document.getElementById('main').innerHTML=`<div class="loading"><div class="spinner"></div>جاري جلب أخبار ${label}...</div>`;
+  document.getElementById('main').innerHTML=`<div class="loading"><div class="spinner"></div>جاري جلب أخبار ${curName}...</div>`;
+  
   try {
-    articles = await fetchGNews(topic);
-    if(!articles.length) throw new Error('لا توجد أخبار متاحة');
-    updateBreaking(articles);
-    updateTicker(articles);
-    render(articles, label);
+    const feedUrl = FEEDS[id].url;
+    const res = await fetch(PROXY + encodeURIComponent(feedUrl));
+    if(!res.ok) throw new Error('فشل الاتصال');
+    const data = await res.json();
+    const xml = new DOMParser().parseFromString(data.contents, 'text/xml');
+    const items = Array.from(xml.querySelectorAll('item')).slice(0,25);
+    if(!items.length) throw new Error('لا توجد أخبار');
+    
+    arts = items.map(el => ({
+      title: el.querySelector('title')?.textContent?.trim() || '',
+      desc:  el.querySelector('description')?.textContent?.replace(/<[^>]+>/g,'').trim() || '',
+      link:  el.querySelector('link')?.textContent?.trim() || '#',
+      img:   gi(el),
+      src:   curName,
+    })).filter(a => a.title);
+
+    updateBreaking(arts);
+    updateTicker(arts);
+    render(arts);
   } catch(e){
     document.getElementById('main').innerHTML=`
-      <div class="error-box">
+      <div class="err">
         <strong>⚠️ ${e.message}</strong><br>
-        <small>تأكد من الاتصال بالإنترنت</small>
-        <br><button onclick="load('${topic}','${label}')">🔄 إعادة المحاولة</button>
+        <small>جرب مصدراً آخر أو أعد المحاولة</small><br>
+        <button onclick="loadFeed('${id}',null)">🔄 إعادة المحاولة</button>
       </div>`;
   }
 }
 
 function updateBreaking(arr){
-  const t=arr.slice(0,6).map(a=>`◆ ${a.title}`).join(' &nbsp;&nbsp; ');
-  document.getElementById('breakingText').innerHTML=t+' &nbsp;&nbsp; '+t;
+  const t = arr.slice(0,6).map(a=>`◆ ${a.title}`).join(' &nbsp;&nbsp; ');
+  document.getElementById('btext').innerHTML = t+' &nbsp;&nbsp; '+t;
 }
 function updateTicker(arr){
-  const t=arr.slice(0,5).map(a=>`<span>📰 ${a.source?.name||'عالمي'}: ${a.title.substring(0,55)}...</span>`).join('');
-  document.getElementById('ticker').innerHTML=t+t;
+  const t = arr.slice(0,5).map(a=>`<span>📰 ${a.src}: ${a.title.substring(0,55)}...</span>`).join('');
+  document.getElementById('ticker').innerHTML = t+t;
 }
 
-function render(arr, label){
-  const hero=arr[0];
-  const sides=arr.slice(1,4);
-  const cards=arr.slice(4,10);
-  const list=arr.slice(10,18);
-  const trending=arr.slice(0,5);
+function render(arr){
+  const hero = arr[0];
+  const sides = arr.slice(1,4);
+  const cards = arr.slice(4,10);
+  const list  = arr.slice(10,18);
+  const trend = arr.slice(0,5);
 
-  document.getElementById('main').innerHTML=`
-    <div class="hero-grid">
-      <div class="hero-main" onclick="open(0)">
-        <img src="${img(hero.image)}" onerror="this.src='${ph(800,300)}'" alt=""/>
-        <div class="content">
-          <span class="cat-badge">${label}</span>
+  document.getElementById('main').innerHTML = `
+    <div class="hero">
+      <div class="hmain" onclick="openArt(0)">
+        <img src="${hero.img||ph(curName)}" onerror="this.src='${ph(curName)}'" alt=""/>
+        <div class="hc">
+          <span class="badge">${curName}</span>
           <h2>${hero.title}</h2>
-          <p>${hero.description||''}</p>
+          <p>${hero.desc.substring(0,160)}${hero.desc.length>160?'...':''}</p>
         </div>
       </div>
-      <div class="hero-side">
+      <div class="hside">
         ${sides.map((a,i)=>`
-          <div class="side-card" onclick="open(${i+1})">
-            <span class="side-cat">${a.source?.name||label}</span>
+          <div class="scard" onclick="openArt(${i+1})">
+            <span class="scat">${a.src}</span>
             <h3>${a.title}</h3>
           </div>`).join('')}
       </div>
     </div>
 
-    <div class="section-title"><div class="dot"></div><h2>أحدث الأخبار</h2></div>
-    <div class="cards-grid">
+    <div class="stitle"><div class="dot"></div><h2>أحدث الأخبار</h2></div>
+    <div class="cgrid">
       ${cards.map((a,i)=>`
-        <div class="card" onclick="open(${i+4})">
-          <img src="${img(a.image)}" onerror="this.src='${ph(400,200)}'" alt=""/>
-          <div class="card-body">
-            <span class="card-cat">◆ ${a.source?.name||label}</span>
+        <div class="card" onclick="openArt(${i+4})">
+          <img src="${a.img||ph(a.src)}" onerror="this.src='${ph(a.src)}'" alt=""/>
+          <div class="cbody">
+            <span class="ccat">◆ ${a.src}</span>
             <h3>${a.title}</h3>
-            <div class="card-src">${a.source?.name||''}</div>
+            <div class="csrc">${a.src}</div>
           </div>
         </div>`).join('')}
     </div>
 
-    <div class="two-col">
+    <div class="twocol">
       <div>
-        <div class="section-title"><div class="dot"></div><h2>تقارير وتحليلات</h2></div>
+        <div class="stitle"><div class="dot"></div><h2>تقارير وتحليلات</h2></div>
         ${list.map((a,i)=>`
-          <div class="list-item" onclick="open(${i+10})">
-            <img src="${img(a.image)}" onerror="this.src='${ph(200,150)}'" alt=""/>
+          <div class="litem" onclick="openArt(${i+10})">
+            <img src="${a.img||ph(a.src)}" onerror="this.src='${ph(a.src)}'" alt=""/>
             <div>
-              <div class="list-cat">${a.source?.name||label}</div>
+              <div class="lcat">${a.src}</div>
               <h4>${a.title}</h4>
-              <div class="list-src">${a.source?.name||''}</div>
+              <div class="lsrc">${a.src}</div>
             </div>
           </div>`).join('')}
       </div>
       <div>
-        <div class="sidebar-box">
+        <div class="sidebar">
           <h3>🔥 الأكثر قراءة</h3>
-          ${trending.map((a,i)=>`
-            <div class="trend-item" onclick="open(${i})">
-              <div class="trend-num">0${i+1}</div>
+          ${trend.map((a,i)=>`
+            <div class="titem" onclick="openArt(${i})">
+              <div class="tnum">0${i+1}</div>
               <p>${a.title.substring(0,70)}${a.title.length>70?'...':''}</p>
             </div>`).join('')}
         </div>
@@ -282,28 +300,28 @@ function render(arr, label){
     </div>`;
 }
 
-function open(i){
-  const a=articles[i];
+function openArt(i){
+  const a = arts[i];
   if(!a) return;
-  document.getElementById('modalBox').innerHTML=`
-    <img class="modal-img" src="${img(a.image)}" onerror="this.src='${ph(720,300)}'" alt=""/>
-    <div class="modal-body">
-      <span class="cat-badge">${a.source?.name||''}</span>
-      <h2 class="modal-title">${a.title}</h2>
-      <p class="modal-desc">${a.content||a.description||''}</p>
-      <div class="modal-src">
-        المصدر: <strong>${a.source?.name||'غير معروف'}</strong> &nbsp;|&nbsp;
-        <a href="${a.url}" target="_blank">قراءة الخبر الأصلي ↗</a>
+  document.getElementById('mbox').innerHTML=`
+    <img class="mimg" src="${a.img||ph(a.src)}" onerror="this.src='${ph(a.src)}'" alt=""/>
+    <div class="mbody">
+      <span class="badge">${a.src}</span>
+      <h2 class="mtitle">${a.title}</h2>
+      <p class="mdesc">${a.desc||'لا يوجد وصف متاح للخبر.'}</p>
+      <div class="msrc">
+        المصدر: <strong>${a.src}</strong> &nbsp;|&nbsp;
+        <a href="${a.link}" target="_blank" rel="noopener">قراءة الخبر الكامل ↗</a>
       </div>
     </div>`;
-  document.getElementById('overlay').classList.add('open');
+  document.getElementById('ov').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeOverlay(e){ if(e.target===document.getElementById('overlay')) closeModal(); }
-function closeModal(){ document.getElementById('overlay').classList.remove('open'); document.body.style.overflow=''; }
+function closeOv(e){ if(e.target===document.getElementById('ov')) closeModal(); }
+function closeModal(){ document.getElementById('ov').classList.remove('open'); document.body.style.overflow=''; }
 
 // Init
-load('breaking','عاجل', document.querySelector('nav button'));
+loadFeed('aljazeera', document.querySelector('nav button'));
 </script>
 </body>
 </html>
