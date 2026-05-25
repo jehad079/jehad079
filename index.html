@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>الرصيف | أخبار لحظة بلحظة</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الرصيف | أخبار العالم</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --ink: #0d0d0d;
@@ -14,668 +14,444 @@
       --gold: #b8860b;
       --mid: #6b6560;
       --line: #d4cfc5;
+      --white: #ffffff;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--paper); color: var(--ink); font-family: 'Cairo', sans-serif; direction: rtl; }
 
-    body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: 'Cairo', sans-serif;
-      direction: rtl;
-    }
-
-    /* ───── TOP BAR ───── */
+    /* TOPBAR */
     .topbar {
-      background: var(--ink);
-      color: #fff;
-      font-size: 0.75rem;
-      padding: 6px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      letter-spacing: 0.03em;
+      background: var(--ink); color: #fff;
+      font-size: 0.75rem; padding: 6px 24px;
+      display: flex; justify-content: space-between; align-items: center;
     }
     .topbar .date { opacity: 0.6; }
-    .topbar .ticker {
-      display: flex;
-      gap: 24px;
-      overflow: hidden;
-      font-size: 0.72rem;
-    }
-    .topbar .ticker span {
+    .ticker-wrap { overflow: hidden; flex: 1; margin: 0 20px; }
+    .ticker {
+      display: inline-flex; gap: 40px;
+      animation: ticker 30s linear infinite;
       white-space: nowrap;
-      opacity: 0.85;
-      animation: slide 18s linear infinite;
     }
-    @keyframes slide {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(100%); }
-    }
+    .ticker span { opacity: 0.85; }
+    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-    /* ───── HEADER ───── */
+    /* HEADER */
     header {
       border-bottom: 3px double var(--ink);
-      padding: 28px 32px 18px;
+      padding: 20px 24px 14px;
       text-align: center;
       background: var(--paper);
-      position: relative;
     }
-    .logo-eyebrow {
-      font-family: 'Amiri', serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      color: var(--mid);
-      margin-bottom: 6px;
-    }
-    .logo {
-      font-family: 'Amiri', serif;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: 700;
-      line-height: 1;
-      color: var(--ink);
-      position: relative;
-      display: inline-block;
-    }
-    .logo::before, .logo::after {
-      content: '◆';
-      font-size: 1rem;
-      color: var(--red);
-      vertical-align: middle;
-      margin: 0 12px;
-    }
-    .logo-sub {
-      font-size: 0.75rem;
-      color: var(--mid);
-      margin-top: 6px;
-      letter-spacing: 0.15em;
-    }
+    .logo { font-family: 'Amiri', serif; font-size: clamp(2.5rem,7vw,5rem); font-weight: 700; line-height: 1; }
+    .logo::before, .logo::after { content: '◆'; font-size: 1rem; color: var(--red); margin: 0 10px; vertical-align: middle; }
+    .logo-sub { font-size: 0.72rem; color: var(--mid); margin-top: 4px; letter-spacing: 0.15em; }
 
-    /* ───── NAV ───── */
+    /* NAV */
     nav {
       background: var(--ink);
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      overflow-x: auto;
+      display: flex; justify-content: center;
+      overflow-x: auto; gap: 0;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      padding: 11px 22px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
+    nav button {
+      color: #fff; background: none; border: none;
+      padding: 10px 18px; font-size: 0.8rem;
+      font-weight: 600; font-family: 'Cairo', sans-serif;
+      cursor: pointer; white-space: nowrap;
       border-left: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.2s;
     }
-    nav a:first-child { border-left: none; }
-    nav a:hover, nav a.active { background: var(--red); color: #fff; }
+    nav button:first-child { border-left: none; }
+    nav button:hover, nav button.active { background: var(--red); }
 
-    /* ───── BREAKING ───── */
+    /* BREAKING */
     .breaking {
-      background: var(--red);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      padding: 8px 32px;
-      gap: 16px;
-      font-size: 0.82rem;
-      overflow: hidden;
+      background: var(--red); color: #fff;
+      display: flex; align-items: center;
+      padding: 7px 24px; gap: 14px; overflow: hidden;
     }
     .breaking-label {
-      background: #fff;
-      color: var(--red);
-      font-weight: 900;
-      padding: 2px 10px;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-      flex-shrink: 0;
-      border-radius: 2px;
+      background: #fff; color: var(--red);
+      font-weight: 900; padding: 2px 8px;
+      font-size: 0.68rem; flex-shrink: 0; border-radius: 2px;
     }
-    .breaking-text {
-      white-space: nowrap;
-      animation: marquee 22s linear infinite;
+    .breaking-text { white-space: nowrap; font-size: 0.8rem; animation: marquee 25s linear infinite; }
+    @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* MAIN */
+    main { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+
+    /* LOADING */
+    .loading {
+      text-align: center; padding: 60px 20px;
+      font-size: 1rem; color: var(--mid);
     }
-    @keyframes marquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid var(--line);
+      border-top-color: var(--red);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ERROR */
+    .error-box {
+      background: #fff3f3; border: 1px solid #ffcccc;
+      padding: 20px; border-radius: 4px;
+      text-align: center; color: var(--red);
+      margin: 20px 0;
     }
 
-    /* ───── LAYOUT ───── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    /* SECTION TITLE */
+    .section-title {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; margin-top: 32px;
+    }
+    .section-title h2 { font-family: 'Amiri', serif; font-size: 1.4rem; font-weight: 700; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+    .section-title .dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
 
-    main { padding: 32px 24px; max-width: 1200px; margin: 0 auto; }
-
-    /* ───── HERO GRID ───── */
+    /* HERO GRID */
     .hero-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 0;
       border: 1px solid var(--line);
-      margin-bottom: 40px;
       background: #fff;
+      margin-bottom: 32px;
     }
-
-    .hero-main {
-      border-left: 1px solid var(--line);
-      padding: 0;
-      overflow: hidden;
-      position: relative;
-    }
-    .hero-main img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(20%);
-      transition: filter 0.4s;
-    }
-    .hero-main:hover img { filter: grayscale(0%); }
-    .hero-main .content { padding: 24px; }
-    .hero-main .category {
-      display: inline-block;
-      background: var(--red);
-      color: #fff;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      letter-spacing: 0.08em;
-      margin-bottom: 10px;
-    }
-    .hero-main h2 {
-      font-family: 'Amiri', serif;
-      font-size: 1.9rem;
-      line-height: 1.4;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-    .hero-main p {
-      font-size: 0.9rem;
-      color: var(--mid);
-      line-height: 1.7;
-    }
-
-    .hero-side {
-      display: flex;
-      flex-direction: column;
-    }
+    .hero-main { border-left: 1px solid var(--line); cursor: pointer; }
+    .hero-main img { width: 100%; height: 280px; object-fit: cover; display: block; transition: opacity 0.3s; }
+    .hero-main:hover img { opacity: 0.9; }
+    .hero-main .content { padding: 20px; }
+    .hero-main .cat { display: inline-block; background: var(--red); color: #fff; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; margin-bottom: 8px; }
+    .hero-main h2 { font-family: 'Amiri', serif; font-size: 1.6rem; line-height: 1.45; margin-bottom: 8px; }
+    .hero-main p { font-size: 0.85rem; color: var(--mid); line-height: 1.7; }
+    .hero-side { display: flex; flex-direction: column; }
     .side-card {
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--line);
-      flex: 1;
-      transition: background 0.2s;
-      cursor: pointer;
+      padding: 16px; border-bottom: 1px solid var(--line);
+      flex: 1; cursor: pointer; transition: background 0.2s;
     }
     .side-card:last-child { border-bottom: none; }
     .side-card:hover { background: var(--cream); }
-    .side-card .category {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-    }
-    .side-card h3 {
-      font-family: 'Amiri', serif;
-      font-size: 1.1rem;
-      line-height: 1.5;
-      margin-bottom: 6px;
-    }
-    .side-card .meta {
-      font-size: 0.7rem;
-      color: var(--mid);
-    }
+    .side-card .cat { font-size: 0.62rem; font-weight: 700; color: var(--gold); letter-spacing: 0.07em; margin-bottom: 5px; display: block; }
+    .side-card h3 { font-family: 'Amiri', serif; font-size: 1rem; line-height: 1.5; }
 
-    /* ───── SECTION TITLE ───── */
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-    .section-title h2 {
-      font-family: 'Amiri', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--line);
-    }
-    .section-title .dot {
-      width: 8px; height: 8px;
-      background: var(--red);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    /* CARDS GRID */
+    .cards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 32px; }
+    .card { background: #fff; border: 1px solid var(--line); overflow: hidden; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+    .card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .card-body { padding: 14px; }
+    .card-body .cat { font-size: 0.62rem; font-weight: 700; color: var(--red); letter-spacing: 0.06em; margin-bottom: 6px; display: block; }
+    .card-body h3 { font-family: 'Amiri', serif; font-size: 1rem; line-height: 1.5; }
+    .card-body .src { font-size: 0.68rem; color: var(--mid); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
 
-    /* ───── CARDS GRID ───── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-bottom: 48px;
+    /* LIST */
+    .list-item {
+      display: flex; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--line);
+      cursor: pointer; transition: background 0.15s;
     }
+    .list-item:hover { background: var(--cream); }
+    .list-item img { width: 90px; height: 65px; object-fit: cover; flex-shrink: 0; }
+    .list-item-text .cat { font-size: 0.6rem; font-weight: 700; color: var(--gold); }
+    .list-item-text h4 { font-family: 'Amiri', serif; font-size: 0.95rem; line-height: 1.45; margin: 3px 0; }
+    .list-item-text .src { font-size: 0.65rem; color: var(--mid); }
 
-    .card {
-      background: #fff;
-      border: 1px solid var(--line);
-      overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
-      cursor: pointer;
+    /* MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7); z-index: 1000;
+      overflow-y: auto; padding: 20px;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+    .modal {
+      background: #fff; max-width: 720px; width: 100%;
+      margin: auto; padding: 0; overflow: hidden;
+      animation: modalIn 0.3s ease;
     }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(15%);
-      transition: filter 0.3s;
+    @keyframes modalIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .modal-img { width: 100%; height: 300px; object-fit: cover; display: block; }
+    .modal-body { padding: 28px; }
+    .modal-cat { display: inline-block; background: var(--red); color: #fff; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; margin-bottom: 14px; }
+    .modal-title { font-family: 'Amiri', serif; font-size: 1.8rem; line-height: 1.4; margin-bottom: 14px; }
+    .modal-desc { font-size: 0.95rem; line-height: 1.8; color: #333; }
+    .modal-src { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--mid); }
+    .modal-src a { color: var(--red); text-decoration: none; }
+    .modal-close {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--ink); color: #fff;
+      border: none; padding: 8px 16px;
+      font-family: 'Cairo', sans-serif; font-size: 0.8rem;
+      cursor: pointer; border-radius: 2px;
     }
-    .card:hover img { filter: grayscale(0); }
-    .card-body { padding: 16px; }
-    .card-body .category {
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--red);
-      letter-spacing: 0.07em;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .card-body h3 {
-      font-family: 'Amiri', serif;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
-    .card-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
-      color: var(--mid);
-      border-top: 1px solid var(--line);
-      padding-top: 10px;
-      margin-top: 10px;
-    }
+    .modal-wrap { position: relative; }
 
-    /* ───── LIST SECTION ───── */
-    .list-section {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 40px;
-      margin-bottom: 48px;
-    }
-
-    .news-list .list-item {
-      display: flex;
-      gap: 16px;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--line);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .news-list .list-item:hover { background: var(--cream); }
-    .news-list .list-item img {
-      width: 100px;
-      height: 72px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .list-item-text .category {
-      font-size: 0.63rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.07em;
-    }
-    .list-item-text h4 {
-      font-family: 'Amiri', serif;
-      font-size: 1rem;
-      line-height: 1.45;
-      margin: 4px 0;
-    }
-    .list-item-text .meta { font-size: 0.68rem; color: var(--mid); }
-
-    /* ───── SIDEBAR ───── */
-    .sidebar-box {
-      background: var(--ink);
-      color: #fff;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-    .sidebar-box h3 {
-      font-family: 'Amiri', serif;
-      font-size: 1.1rem;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
-    .trend-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
+    /* SIDEBAR */
+    .two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+    .sidebar-box { background: var(--ink); color: #fff; padding: 18px; margin-bottom: 20px; }
+    .sidebar-box h3 { font-family: 'Amiri', serif; font-size: 1.05rem; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .trend-item { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.08); cursor: pointer; }
     .trend-item:last-child { border-bottom: none; }
-    .trend-num {
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: var(--red);
-      line-height: 1;
-      flex-shrink: 0;
-      min-width: 28px;
-    }
-    .trend-item p { font-size: 0.82rem; line-height: 1.5; opacity: 0.9; }
+    .trend-num { font-size: 1.3rem; font-weight: 900; color: var(--red); min-width: 26px; line-height: 1; }
+    .trend-item p { font-size: 0.8rem; line-height: 1.5; opacity: 0.88; }
 
-    /* ───── WEATHER ───── */
-    .weather-box {
-      background: linear-gradient(135deg, #1a3a5c, #2563a8);
-      color: #fff;
-      padding: 20px;
-      border-radius: 2px;
-    }
-    .weather-box h3 {
-      font-size: 0.8rem;
-      opacity: 0.7;
-      margin-bottom: 12px;
-      letter-spacing: 0.05em;
-    }
-    .weather-main {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    .weather-icon { font-size: 2.5rem; }
-    .weather-temp { font-size: 2.8rem; font-weight: 700; }
-    .weather-city { font-size: 0.85rem; opacity: 0.8; }
-    .weather-desc { font-size: 0.8rem; opacity: 0.65; }
+    /* FOOTER */
+    footer { background: var(--ink); color: rgba(255,255,255,0.55); padding: 32px 24px 16px; margin-top: 40px; }
+    .footer-logo { font-family: 'Amiri', serif; font-size: 1.8rem; color: #fff; margin-bottom: 8px; }
+    .footer-bottom { text-align: center; font-size: 0.7rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; margin-top: 24px; max-width: 1200px; margin-left: auto; margin-right: auto; }
 
-    /* ───── FOOTER ───── */
-    footer {
-      background: var(--ink);
-      color: rgba(255,255,255,0.6);
-      padding: 40px 32px 20px;
-      margin-top: 40px;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto 30px;
-    }
-    .footer-logo {
-      font-family: 'Amiri', serif;
-      font-size: 2rem;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .footer-about { font-size: 0.82rem; line-height: 1.7; }
-    .footer-links h4 {
-      color: #fff;
-      font-size: 0.85rem;
-      margin-bottom: 14px;
-      font-weight: 700;
-    }
-    .footer-links ul { list-style: none; }
-    .footer-links li { padding: 5px 0; font-size: 0.78rem; }
-    .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; }
-    .footer-links a:hover { color: #fff; }
-    .footer-bottom {
-      text-align: center;
-      font-size: 0.73rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-top: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* ───── RESPONSIVE ───── */
-    @media (max-width: 768px) {
+    /* RESPONSIVE */
+    @media(max-width:768px) {
       .hero-grid { grid-template-columns: 1fr; }
       .cards-grid { grid-template-columns: 1fr; }
-      .list-section { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 20px; }
-      nav a { padding: 10px 14px; font-size: 0.75rem; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media(max-width:480px) {
+      .cards-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <span class="date">الإثنين، 26 مايو 2026</span>
-    <div class="ticker">
-      <span>🌡️ الرياض 38° &nbsp;|&nbsp; 💰 الذهب 3,250$ &nbsp;|&nbsp; 🛢️ النفط 82$ &nbsp;|&nbsp; 💱 الدولار 3.75 ريال</span>
+<!-- TOPBAR -->
+<div class="topbar">
+  <span class="date" id="currentDate"></span>
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker">
+      <span>🌡️ جاري تحميل الأخبار العاجلة...</span>
+      <span>🌡️ جاري تحميل الأخبار العاجلة...</span>
     </div>
   </div>
+</div>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo-eyebrow">صحيفة إلكترونية مستقلة</div>
-    <div class="logo">الرصيف</div>
-    <div class="logo-sub">الخبر الحقيقي · في الوقت الحقيقي</div>
-  </header>
+<!-- HEADER -->
+<header>
+  <div style="font-family:'Amiri',serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--mid);margin-bottom:4px;">صحيفة إلكترونية مستقلة</div>
+  <div class="logo">الرصيف</div>
+  <div class="logo-sub">أخبار العالم · لحظة بلحظة</div>
+</header>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="active">الرئيسية</a>
-    <a href="#">عاجل</a>
-    <a href="#">محلي</a>
-    <a href="#">دولي</a>
-    <a href="#">اقتصاد</a>
-    <a href="#">رياضة</a>
-    <a href="#">تقنية</a>
-    <a href="#">ثقافة</a>
-    <a href="#">رأي</a>
-  </nav>
+<!-- NAV -->
+<nav id="nav">
+  <button class="active" onclick="loadCategory('general','الرئيسية',this)">الرئيسية</button>
+  <button onclick="loadCategory('politics','سياسة',this)">سياسة</button>
+  <button onclick="loadCategory('business','اقتصاد',this)">اقتصاد</button>
+  <button onclick="loadCategory('technology','تقنية',this)">تقنية</button>
+  <button onclick="loadCategory('sports','رياضة',this)">رياضة</button>
+  <button onclick="loadCategory('science','علوم',this)">علوم</button>
+  <button onclick="loadCategory('health','صحة',this)">صحة</button>
+  <button onclick="loadCategory('entertainment','ترفيه',this)">ترفيه</button>
+</nav>
 
-  <!-- BREAKING -->
-  <div class="breaking">
-    <span class="breaking-label">عاجل</span>
-    <span class="breaking-text">
-      ◆ مجلس الأمن يعقد جلسة طارئة لمناقشة الأوضاع الإقليمية &nbsp;&nbsp;
-      ◆ البنك المركزي يُبقي أسعار الفائدة دون تغيير &nbsp;&nbsp;
-      ◆ اكتشاف علمي جديد في مجال الطاقة الشمسية بمنطقة الخليج &nbsp;&nbsp;
-      ◆ مجلس الأمن يعقد جلسة طارئة لمناقشة الأوضاع الإقليمية &nbsp;&nbsp;
-      ◆ البنك المركزي يُبقي أسعار الفائدة دون تغيير &nbsp;&nbsp;
-    </span>
+<!-- BREAKING -->
+<div class="breaking">
+  <span class="breaking-label">عاجل</span>
+  <span class="breaking-text" id="breakingText">
+    ◆ جاري تحميل الأخبار العاجلة... &nbsp;&nbsp; ◆ جاري تحميل الأخبار العاجلة... &nbsp;&nbsp;
+  </span>
+</div>
+
+<!-- MAIN -->
+<main id="mainContent">
+  <div class="loading">
+    <div class="spinner"></div>
+    جاري جلب أحدث الأخبار من حول العالم...
   </div>
+</main>
 
-  <!-- MAIN -->
-  <main>
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-wrap">
+    <button class="modal-close" onclick="closeModalBtn()">✕ إغلاق</button>
+    <div class="modal" id="modalContent"></div>
+  </div>
+</div>
 
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="footer-logo">◆ الرصيف</div>
+    <p style="font-size:0.8rem;line-height:1.7;">صحيفة إلكترونية مستقلة تجمع أخبار العالم من مئات المصادر العالمية وتقدمها للقارئ العربي.</p>
+  </div>
+  <div class="footer-bottom">جميع الحقوق محفوظة © 2026 · صحيفة الرصيف الإلكترونية · مدعوم بـ NewsAPI</div>
+</footer>
+
+<script>
+const API_KEY = '0d3a9846eb414608ad492847e0dc0f8b';
+let allArticles = [];
+let currentCategory = 'general';
+let currentCategoryAr = 'الرئيسية';
+
+const catMap = {
+  general: 'الرئيسية', politics: 'سياسة', business: 'اقتصاد',
+  technology: 'تقنية', sports: 'رياضة', science: 'علوم',
+  health: 'صحة', entertainment: 'ترفيه'
+};
+
+// Date
+const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const now = new Date();
+document.getElementById('currentDate').textContent = `${days[now.getDay()]}، ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+
+function getCatAr(cat) { return catMap[cat] || cat; }
+
+function placeholder(w,h) {
+  return `https://placehold.co/${w}x${h}/1a1a1a/ffffff?text=الرصيف`;
+}
+
+function imgSrc(url) { return url || placeholder(600,400); }
+
+async function fetchNews(category) {
+  const queries = {
+    general: 'world news',
+    politics: 'politics government election',
+    business: 'economy finance market',
+    technology: 'technology AI innovation',
+    sports: 'sports football',
+    science: 'science research discovery',
+    health: 'health medicine',
+    entertainment: 'entertainment culture'
+  };
+  const q = queries[category] || 'news';
+  const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(q)}&language=en&sortBy=publishedAt&pageSize=30&apiKey=${API_KEY}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('فشل في جلب الأخبار');
+  const data = await res.json();
+  if (data.status !== 'ok') throw new Error(data.message || 'خطأ في API');
+  return data.articles.filter(a => a.title && a.title !== '[Removed]' && a.url);
+}
+
+async function loadCategory(cat, catAr, btn) {
+  currentCategory = cat;
+  currentCategoryAr = catAr;
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.getElementById('mainContent').innerHTML = `
+    <div class="loading"><div class="spinner"></div>جاري جلب أخبار ${catAr}...</div>`;
+  try {
+    allArticles = await fetchNews(cat);
+    if (!allArticles.length) throw new Error('لا توجد أخبار');
+    updateBreaking(allArticles);
+    renderPage(allArticles, catAr);
+  } catch(e) {
+    document.getElementById('mainContent').innerHTML = `
+      <div class="error-box">
+        <strong>⚠️ ${e.message}</strong><br>
+        <small>تأكد من اتصال الإنترنت أو حاول مرة أخرى</small><br><br>
+        <button onclick="loadCategory('${cat}','${catAr}')" style="padding:8px 20px;background:var(--red);color:#fff;border:none;cursor:pointer;font-family:'Cairo',sans-serif;">إعادة المحاولة</button>
+      </div>`;
+  }
+}
+
+function updateBreaking(articles) {
+  const texts = articles.slice(0,8).map(a => `◆ ${a.title}`).join(' &nbsp;&nbsp;&nbsp; ');
+  const full = texts + ' &nbsp;&nbsp;&nbsp; ' + texts;
+  document.getElementById('breakingText').innerHTML = full;
+  // ticker
+  const tItems = articles.slice(0,6).map(a => `<span>📰 ${a.source?.name || 'عالمي'}: ${a.title.substring(0,60)}...</span>`).join('');
+  document.getElementById('ticker').innerHTML = tItems + tItems;
+}
+
+function renderPage(articles, catAr) {
+  const hero = articles[0];
+  const sideItems = articles.slice(1,4);
+  const cards = articles.slice(4,10);
+  const listItems = articles.slice(10,18);
+  const trending = articles.slice(0,5);
+
+  document.getElementById('mainContent').innerHTML = `
     <!-- HERO -->
     <div class="hero-grid">
-      <div class="hero-main">
-        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80" alt="خبر رئيسي" />
+      <div class="hero-main" onclick="openArticle(${0})">
+        <img src="${imgSrc(hero.urlToImage)}" alt="" onerror="this.src='${placeholder(800,300)}'"/>
         <div class="content">
-          <span class="category">دولي</span>
-          <h2>قمة دولية تُعقد في جنيف لبحث ملفات الأمن والاستقرار الإقليمي وتداعياتها على المنطقة</h2>
-          <p>اجتمع قادة ودبلوماسيون من أكثر من أربعين دولة في جنيف لمناقشة آليات تعزيز الأمن الإقليمي ووضع أُطر تعاون مشتركة في مواجهة التحديات الراهنة.</p>
+          <span class="cat">${catAr}</span>
+          <h2>${hero.title}</h2>
+          <p>${hero.description || ''}</p>
         </div>
       </div>
       <div class="hero-side">
-        <div class="side-card">
-          <span class="category">اقتصاد</span>
-          <h3>أسواق الخليج تُغلق على ارتفاع ملحوظ وسط توقعات إيجابية</h3>
-          <div class="meta">منذ ساعتين · فريق التحرير</div>
-        </div>
-        <div class="side-card">
-          <span class="category">تقنية</span>
-          <h3>شركات الذكاء الاصطناعي تتسابق نحو نماذج جديدة تُحدث ثورة في القطاع</h3>
-          <div class="meta">منذ 3 ساعات · مراسل التقنية</div>
-        </div>
-        <div class="side-card">
-          <span class="category">رياضة</span>
-          <h3>المنتخب الوطني يُجري مرانه الأخير قبيل المباراة الحاسمة</h3>
-          <div class="meta">منذ 4 ساعات · قسم الرياضة</div>
-        </div>
+        ${sideItems.map((a,i) => `
+          <div class="side-card" onclick="openArticle(${i+1})">
+            <span class="cat">${a.source?.name || catAr}</span>
+            <h3>${a.title}</h3>
+          </div>`).join('')}
       </div>
     </div>
 
-    <!-- LATEST NEWS -->
-    <div class="section-title">
-      <div class="dot"></div>
-      <h2>أحدث الأخبار</h2>
-    </div>
-
+    <!-- CARDS -->
+    <div class="section-title"><div class="dot"></div><h2>أحدث الأخبار</h2></div>
     <div class="cards-grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&q=80" alt="" />
-        <div class="card-body">
-          <span class="category">◆ اقتصاد</span>
-          <h3>مشاريع استثمارية ضخمة تُطلق في منطقة نيوم ضمن رؤية 2030</h3>
-          <div class="card-meta"><span>منذ ساعة</span><span>محلي</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?w=600&q=80" alt="" />
-        <div class="card-body">
-          <span class="category">◆ بيئة</span>
-          <h3>تقرير أممي يُحذر من ارتفاع منسوب البحار بوتيرة غير مسبوقة</h3>
-          <div class="card-meta"><span>منذ 3 ساعات</span><span>دولي</span></div>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=80" alt="" />
-        <div class="card-body">
-          <span class="category">◆ رياضة</span>
-          <h3>نجم كرة القدم يُعلن رسمياً انتقاله إلى نادٍ خليجي في صفقة تاريخية</h3>
-          <div class="card-meta"><span>منذ 5 ساعات</span><span>رياضة</span></div>
-        </div>
-      </div>
+      ${cards.map((a,i) => `
+        <div class="card" onclick="openArticle(${i+4})">
+          <img src="${imgSrc(a.urlToImage)}" alt="" onerror="this.src='${placeholder(400,200)}'"/>
+          <div class="card-body">
+            <span class="cat">◆ ${a.source?.name || catAr}</span>
+            <h3>${a.title}</h3>
+            <div class="src">${a.source?.name || ''}</div>
+          </div>
+        </div>`).join('')}
     </div>
 
-    <!-- LIST + SIDEBAR -->
-    <div class="list-section">
+    <!-- TWO COL -->
+    <div class="two-col">
       <div>
-        <div class="section-title">
-          <div class="dot"></div>
-          <h2>تقارير وتحليلات</h2>
-        </div>
-        <div class="news-list">
-          <div class="list-item">
-            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=300&q=80" alt="" />
+        <div class="section-title"><div class="dot"></div><h2>تقارير وتحليلات</h2></div>
+        ${listItems.map((a,i) => `
+          <div class="list-item" onclick="openArticle(${i+10})">
+            <img src="${imgSrc(a.urlToImage)}" alt="" onerror="this.src='${placeholder(200,150)}'"/>
             <div class="list-item-text">
-              <div class="category">تقنية</div>
-              <h4>كيف يُعيد الذكاء الاصطناعي تشكيل سوق العمل في المنطقة العربية؟</h4>
-              <div class="meta">بقلم: د. سلمى الرشيد · 26 مايو 2026</div>
+              <div class="cat">${a.source?.name || catAr}</div>
+              <h4>${a.title}</h4>
+              <div class="src">${a.source?.name || ''}</div>
             </div>
-          </div>
-          <div class="list-item">
-            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&q=80" alt="" />
-            <div class="list-item-text">
-              <div class="category">اقتصاد</div>
-              <h4>توقعات النمو الاقتصادي الخليجي تتجاوز 4% رغم تقلبات الأسواق</h4>
-              <div class="meta">بقلم: أحمد المنصور · 25 مايو 2026</div>
-            </div>
-          </div>
-          <div class="list-item">
-            <img src="https://images.unsplash.com/photo-1488229297570-58520851e868?w=300&q=80" alt="" />
-            <div class="list-item-text">
-              <div class="category">علوم</div>
-              <h4>علماء عرب يُشاركون في مشروع فضائي دولي لاستكشاف المريخ</h4>
-              <div class="meta">بقلم: نورة الحربي · 24 مايو 2026</div>
-            </div>
-          </div>
-          <div class="list-item">
-            <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=300&q=80" alt="" />
-            <div class="list-item-text">
-              <div class="category">ثقافة</div>
-              <h4>مهرجان أدبي عربي يجمع أبرز الأقلام في الرياض الشهر القادم</h4>
-              <div class="meta">بقلم: ليلى بن عمر · 23 مايو 2026</div>
-            </div>
-          </div>
-        </div>
+          </div>`).join('')}
       </div>
-
       <div>
-        <!-- TRENDING -->
         <div class="sidebar-box">
           <h3>🔥 الأكثر قراءة</h3>
-          <div class="trend-item">
-            <div class="trend-num">01</div>
-            <p>أسعار النفط تقفز 3% بعد قرارات أوبك+ المفاجئة</p>
-          </div>
-          <div class="trend-item">
-            <div class="trend-num">02</div>
-            <p>الاتحاد الأوروبي يُقر حزمة دعم اقتصادي جديدة</p>
-          </div>
-          <div class="trend-item">
-            <div class="trend-num">03</div>
-            <p>اكتشاف رواسب معدنية ضخمة في منطقة عربية</p>
-          </div>
-          <div class="trend-item">
-            <div class="trend-num">04</div>
-            <p>تحولات جذرية في منظومة التعليم الرقمي العربي</p>
-          </div>
-          <div class="trend-item">
-            <div class="trend-num">05</div>
-            <p>انطلاق موسم صيفي استثنائي في المدن السياحية</p>
-          </div>
-        </div>
-
-        <!-- WEATHER -->
-        <div class="weather-box">
-          <h3>◈ حالة الطقس — الرياض</h3>
-          <div class="weather-main">
-            <div class="weather-icon">☀️</div>
-            <div>
-              <div class="weather-temp">38°</div>
-              <div class="weather-city">مشمس جزئياً</div>
-            </div>
-          </div>
-          <div class="weather-desc">رطوبة 22% · رياح 15 كم/س · غداً 36°</div>
+          ${trending.map((a,i) => `
+            <div class="trend-item" onclick="openArticle(${i})">
+              <div class="trend-num">0${i+1}</div>
+              <p>${a.title.substring(0,80)}${a.title.length>80?'...':''}</p>
+            </div>`).join('')}
         </div>
       </div>
     </div>
+  `;
+}
 
-  </main>
+function openArticle(index) {
+  const a = allArticles[index];
+  if (!a) return;
+  document.getElementById('modalContent').innerHTML = `
+    <img class="modal-img" src="${imgSrc(a.urlToImage)}" alt="" onerror="this.src='${placeholder(720,300)}'"/>
+    <div class="modal-body">
+      <span class="modal-cat">${a.source?.name || currentCategoryAr}</span>
+      <h2 class="modal-title">${a.title}</h2>
+      <p class="modal-desc">${a.description || ''}<br><br>${a.content ? a.content.replace(/\[\+\d+ chars\]/,'') : ''}</p>
+      <div class="modal-src">
+        المصدر: <strong>${a.source?.name || 'غير معروف'}</strong> &nbsp;|&nbsp;
+        <a href="${a.url}" target="_blank">قراءة الخبر الأصلي ↗</a>
+      </div>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-grid">
-      <div>
-        <div class="footer-logo">الرصيف</div>
-        <p class="footer-about">صحيفة إلكترونية مستقلة تسعى إلى تقديم الخبر الموثوق والتحليل الرصين. نؤمن بحرية الصحافة ومسؤوليتها تجاه القارئ.</p>
-      </div>
-      <div class="footer-links">
-        <h4>أقسام الموقع</h4>
-        <ul>
-          <li><a href="#">محلي</a></li>
-          <li><a href="#">دولي</a></li>
-          <li><a href="#">اقتصاد</a></li>
-          <li><a href="#">رياضة</a></li>
-          <li><a href="#">تقنية</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>عن الرصيف</h4>
-        <ul>
-          <li><a href="#">من نحن</a></li>
-          <li><a href="#">تواصل معنا</a></li>
-          <li><a href="#">سياسة الخصوصية</a></li>
-          <li><a href="#">الإعلان معنا</a></li>
-          <li><a href="#">خريطة الموقع</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      جميع الحقوق محفوظة © 2026 · صحيفة الرصيف الإلكترونية
-    </div>
-  </footer>
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+}
+function closeModalBtn() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
+// Init
+loadCategory('general', 'الرئيسية', document.querySelector('nav button'));
+</script>
 </body>
 </html>
